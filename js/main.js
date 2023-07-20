@@ -1,15 +1,16 @@
-// input field part
+// input field
 document.getElementById('btn-search').addEventListener('click', function () {
     const inputField = document.getElementById('input-field');
     const inputFieldText = inputField.value;
-    console.log(inputFieldText);
+    inputField.value = '';
+    loadingFetchData(inputFieldText);
 });
 
-// input field fetch data part
+// input field fetch data
 const loadingFetchData = async (searchText) => {
     try {
-        // const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-        const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+        // const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
         const res = await fetch(url);
         const data = await res.json();
         displayFetchData(data.data);
@@ -19,9 +20,18 @@ const loadingFetchData = async (searchText) => {
     }
 }
 
-
+// display input fetch data
 const displayFetchData = (phones) => {
     const phonesContainer = document.getElementById('phones-container');
+    phonesContainer.textContent = '';
+    phones = phones.slice(0, 5);
+    const notFoundMessage = document.getElementById('not-found-message');
+    if (phones.length === 0) {
+        notFoundMessage.classList.remove('d-none');
+    }
+    else {
+        notFoundMessage.classList.add('d-none');
+    }
     phones.forEach(phone => {
         console.log(phone)
         const phoneDiv = document.createElement('div');
@@ -39,4 +49,8 @@ const displayFetchData = (phones) => {
         phonesContainer.appendChild(phoneDiv);
     })
 }
-loadingFetchData();
+
+
+
+
+// loadingFetchData();
