@@ -1,5 +1,6 @@
 // input field
 document.getElementById('btn-search').addEventListener('click', function () {
+    spinner(true);
     const inputField = document.getElementById('input-field');
     const inputFieldText = inputField.value;
     inputField.value = '';
@@ -48,9 +49,19 @@ const displayFetchData = (phones) => {
         `
         phonesContainer.appendChild(phoneDiv);
     })
+    spinner(false);
 }
 
-
+// display spinner
+const spinner = isLoading => {
+    const spinnerLoader = document.getElementById('spinner');
+    if (isLoading) {
+        spinnerLoader.classList.remove('d-none');
+    }
+    else {
+        spinnerLoader.classList.add('d-none');
+    }
+}
 
 
 // loadingFetchData();
