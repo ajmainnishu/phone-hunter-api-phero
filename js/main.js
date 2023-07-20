@@ -26,13 +26,7 @@ const displayFetchData = (phones) => {
     const phonesContainer = document.getElementById('phones-container');
     phonesContainer.textContent = '';
     phones = phones.slice(0, 5);
-    const notFoundMessage = document.getElementById('not-found-message');
-    if (phones.length === 0) {
-        notFoundMessage.classList.remove('d-none');
-    }
-    else {
-        notFoundMessage.classList.add('d-none');
-    }
+    dataFoundMessage(phones);
     phones.forEach(phone => {
         console.log(phone)
         const phoneDiv = document.createElement('div');
@@ -50,6 +44,17 @@ const displayFetchData = (phones) => {
         phonesContainer.appendChild(phoneDiv);
     })
     spinner(false);
+}
+
+// data found or not message
+const dataFoundMessage = (phones) => {
+    const notFoundMessage = document.getElementById('not-found-message');
+    if (phones.length === 0) {
+        notFoundMessage.classList.remove('d-none');
+    }
+    else {
+        notFoundMessage.classList.add('d-none');
+    }
 }
 
 // display spinner
