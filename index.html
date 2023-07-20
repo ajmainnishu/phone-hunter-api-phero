@@ -13,29 +13,45 @@
     <!-- main section start -->
     <main>
         <section class="container">
+
             <!-- input field part -->
             <div>
                 <input type="text" name="" id="input-field" placeholder="please type here">
                 <button id="btn-search">Search</button>
             </div>
+
             <!-- input field data display part -->
             <div id="phones-container" class="row row-cols-1 row-cols-md-3 g-4"></div>
+
             <!-- data found or not message -->
             <div id="not-found-message" class="p-5 d-none">
                 <p>Data Not Found. Please try again...!</p>
             </div>
+
             <!-- display spinner -->
             <div id="spinner" class="d-flex justify-content-center py-5 my-5 d-none">
                 <div class="spinner-border" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
-
-
-
             
-
-
+            <!-- display button modal -->
+            <div>
+                <div class="modal fade" id="phoneDetails" tabindex="-1" aria-labelledby="phoneDetailsLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="phoneDetailsLabel"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div id="body-modal" class="modal-body"></div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
 
         </section>
     </main>

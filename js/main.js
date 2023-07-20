@@ -36,7 +36,7 @@ const displayFetchData = (phones) => {
             <div class="card-body">
                 <h5 class="card-title">${phone.phone_name}</h5>
                 <p class="card-text">This is a short card.</p>
-                <a onclick="phoneDetails('${phone.slug}')" class="btn btn-primary">Details</a>
+                <a onclick="phoneDetails('${phone.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetails">Details</a>
             </div>
         </div>
         `
@@ -74,9 +74,28 @@ const phoneDetails = async id => {
         const res = await fetch(url);
         const data = await res.json();
         console.log(data.data);
+        modalPhoneDetails(data.data);
     }
     catch (error) {
         console.log(error);
     }
+}
+
+// display button modal
+const modalPhoneDetails = phone => {
+    const phoneDetailsLabel = document.getElementById('phoneDetailsLabel');
+    phoneDetailsLabel.innerText = phone.name;
+    const modalBody = document.getElementById('body-modal');
+    modalBody.innerHTML = `
+        <p><b>Brand:</b> ${phone.brand ? phone.brand : 'Not Found'}</p>
+        <p><b>Release Date:</b> ${phone.releaseDate 
+        ? phone.releaseDate : 'Not Found'}</p>
+        <p><b>Storage:</b> ${phone.mainFeatures ? phone.mainFeatures.storage : 'Not Found'}</p>
+        <p><b>Chipset:</b> ${phone.mainFeatures ? phone.mainFeatures.chipSet : 'Not Found'}</p>
+        <p><b>Memory:</b> ${phone.mainFeatures ? phone.mainFeatures.memory : 'Not Found'}</p>
+        <p><b>Display:</b> ${phone.mainFeatures ? phone.mainFeatures.displaySize : 'Not Found'}</p>
+        <p><b>Bluetooth:</b> ${phone.others ? phone.others.Bluetooth : 'Not Found'}</p>
+        <p><b>NFC:</b> ${phone.others ? phone.others.NFC : 'Not Found'}</p>
+    `
 }
 loadingFetchData();
