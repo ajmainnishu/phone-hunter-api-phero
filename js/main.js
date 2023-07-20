@@ -10,8 +10,8 @@ document.getElementById('btn-search').addEventListener('click', function () {
 // input field fetch data
 const loadingFetchData = async (searchText) => {
     try {
-        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-        // const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
+        // const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+        const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
         const res = await fetch(url);
         const data = await res.json();
         displayFetchData(data.data);
@@ -28,7 +28,6 @@ const displayFetchData = (phones) => {
     phones = phones.slice(0, 5);
     dataFoundMessage(phones);
     phones.forEach(phone => {
-        console.log(phone)
         const phoneDiv = document.createElement('div');
         phoneDiv.classList.add('col');
         phoneDiv.innerHTML = `
@@ -37,7 +36,7 @@ const displayFetchData = (phones) => {
             <div class="card-body">
                 <h5 class="card-title">${phone.phone_name}</h5>
                 <p class="card-text">This is a short card.</p>
-                <a href="" class="btn btn-primary">Details</a>
+                <a onclick="phoneDetails('${phone.slug}')" class="btn btn-primary">Details</a>
             </div>
         </div>
         `
@@ -68,5 +67,16 @@ const spinner = isLoading => {
     }
 }
 
-
-// loadingFetchData();
+// button fetch data
+const phoneDetails = async id => {
+    try {
+        const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+        const res = await fetch(url);
+        const data = await res.json();
+        console.log(data.data);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+loadingFetchData();
