@@ -1,20 +1,19 @@
 // input field
 document.getElementById('btn-search').addEventListener('click', function () {
-    spinner(true);
-    const inputField = document.getElementById('input-field');
-    const inputFieldText = inputField.value;
-    inputField.value = '';
-    loadingFetchData(inputFieldText);
+    loadingButtonData(10);
 });
 
+
+
+
 // input field fetch data
-const loadingFetchData = async (searchText) => {
+const loadingFetchData = async (searchText, dataLimit) => {
     try {
-        // const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
-        const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
+        const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
+        // const url = `https://openapi.programming-hero.com/api/phones?search=iphone`;
         const res = await fetch(url);
         const data = await res.json();
-        displayFetchData(data.data);
+        displayFetchData(data.data, dataLimit);
     }
     catch (error) {
         console.log(error);
@@ -22,10 +21,17 @@ const loadingFetchData = async (searchText) => {
 }
 
 // display input fetch data
-const displayFetchData = (phones) => {
+const displayFetchData = (phones, dataLimit) => {
     const phonesContainer = document.getElementById('phones-container');
     phonesContainer.textContent = '';
-    phones = phones.slice(0, 5);
+    const showAll = document.getElementById('show-all');
+    if (phones.length >= dataLimit) {
+        phones = phones.slice(0, 9);
+        showAll.classList.remove('d-none');
+    }
+    else {
+        showAll.classList.add('d-none');
+    }
     dataFoundMessage(phones);
     phones.forEach(phone => {
         const phoneDiv = document.createElement('div');
@@ -98,4 +104,18 @@ const modalPhoneDetails = phone => {
         <p><b>NFC:</b> ${phone.others ? phone.others.NFC : 'Not Found'}</p>
     `
 }
-loadingFetchData();
+
+// show all button
+document.getElementById('btn-show-all').addEventListener('click', function () {
+    loadingButtonData();
+    const inputField = document.getElementById('input-field');
+    inputField.value = '';
+})
+// loadingFetchData();
+
+
+document.getElementById('input-field').addEventListener('keypress', function (event) {
+    if (event.key === 'Enter') {
+        loadingButtonData(10);
+    }
+})
