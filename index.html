@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- website icon -->
+    <link rel="shortcut icon" href="./icon/smartphone-call.ico" type="image/x-icon">
+
     <!-- website title -->
     <title>Phone Hunter API</title>
 
@@ -12,32 +15,41 @@
 </head>
 <body>
 
+    <!-- header section start -->
+    <header>
+        <h1 class="text-center py-5 display-2 fw-bold text-secondary">Phone Hunter API</h1>
+    </header>
+    <!-- header section end -->
+
+
+
+
     <!-- main section start -->
     <main>
         <section class="container">
 
             <!-- input field part -->
-            <div>
-                <input type="text" name="" id="input-field" placeholder="please type here">
-                <button id="btn-search">Search</button>
+            <div class="d-flex flex-column flex-md-row w-50 mx-auto py-5">
+                <input class="form-control my-1" type="text" name="" id="input-field" placeholder="please type here">
+                <button id="btn-search" class="btn btn-secondary my-1">Search</button>
             </div>
 
             <!-- input field data display part -->
-            <div id="phones-container" class="row row-cols-1 row-cols-md-3 g-4"></div>
+            <div id="phones-container" class="row row-cols-1 row-cols-md-3 g-4 my-5"></div>
 
             <!-- show all button -->
             <div id="show-all" class="py-5 text-center d-none">
-                <button id="btn-show-all" class="btn btn-primary" >Show All</button>
+                <button id="btn-show-all" class="btn btn-secondary" >Show All</button>
             </div>
 
             <!-- data found or not message -->
-            <div id="not-found-message" class="p-5 d-none">
-                <p>Data Not Found. Please try again...!</p>
+            <div id="not-found-message" class="py-1 d-none">
+                <p class="text-center fw-bold fs-1 text-secondary">Data Not Found. Please try again...!</p>
             </div>
 
             <!-- display spinner -->
-            <div id="spinner" class="d-flex justify-content-center py-5 my-5 d-none">
-                <div class="spinner-border" role="status">
+            <div id="spinner" class="d-flex justify-content-center py-1 d-none">
+                <div class="spinner-border text-secondary" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
             </div>
@@ -72,7 +84,9 @@
     
     <!-- js file link -->
     <script src="./js/common.js"></script>
-    <script src="./js/main.js"></script>
+    <script src="./js/input-field.js"></script>
+    <script src="./js/modal-button.js"></script>
+    <script src="./js/button-showall.js"></script>
 
 </body>
 </html>
